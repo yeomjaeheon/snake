@@ -13,6 +13,18 @@ pygame.display.set_caption('snake')
 
 background_color = (255, 255, 255)
 
+def circle_segment_collide(cir_center, cir_radius, seg_begin_pos, seg_end_pos):
+    a = (cir_center - seg_begin_pos).magnitude_squared()
+    b = (cir_center - seg_end_pos).magnitude_squared()
+    if a <= cir_radius ** 2 or b <= cir_radius ** 2:
+        return True
+    else:
+        L = (seg_end_pos - seg_begin_pos).magnitude()
+        l = ((a - b) / L + L) * 0.5
+        if (a - l ** 2) <= cir_radius ** 2:
+            return True
+    return False
+
 class blob:
     def __init__(self, pos, radius, color):
         self.pos = pos
