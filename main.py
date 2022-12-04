@@ -87,8 +87,10 @@ class snake:
             dir_vec = (self.body[-2].pos - self.body[-1].pos).normalize()
             self.body.append(blob(self.body[-1].pos - dir_vec * self.radius * 2, self.radius, self.color))
         else:
-            mouse_x, mouse_y = pygame.mouse.get_pos()
-            dir_vec = (pygame.Vector2(mouse_x, mouse_y) - self.body[-1].pos).normalize()
+            if self.head.pos == self.head.pos_prev:
+                dir_vec = pygame.Vector2(1, 0)
+            else:
+                dir_vec = (self.head.pos - self.head.pos_prev).normalize()
             self.body.append(blob(self.body[-1].pos - dir_vec * self.radius * 2, self.radius, self.color))
             
 default_radius = 10
